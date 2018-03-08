@@ -1,0 +1,42 @@
+<html>
+        <head>
+            <title> Ajax Client </title>
+            <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
+        </head>
+    
+        <body>
+            <ul id="produtos"> </ul>
+            <script>
+                $.ajax({
+                url: "http://localhost:3000/produtos/",
+                dataType: "json"
+                ,success: function( data ) {
+                    //debugger;
+                    var varHtml ="";
+                    for (var i=0,total=data.length; i<total;i++){
+                        varHtml += '<li>' + data[i].nome + '\
+                                <a href="#" onClick="comprar(\'' + data[i].id +'\')">Comprar</a></li>';
+                            }
+                    $(produtos).html(varHtml);
+                        }
+                });/*
+                //beforeSend: function( xhr ) {
+                    //debugger;
+                  //  xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+                //}
+                })
+                .done(function( data ) {
+                    //debugger;
+                    var varHtml ="";
+                    for (var i=0,total=data.length; i<total;i++){
+                        varHtml += '<li>' + data[i].nome + '\
+                                <a href="#" onClick="comprar(\'' + data[i].id +'\')">Comprar</a></li>';
+                            }
+                    $(produtos).html(varHtml);
+                });
+                */
+                
+
+            </script>
+        </body>
+    </html>

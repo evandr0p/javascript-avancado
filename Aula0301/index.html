@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title> Ajax Client </title>
+    </head>
+
+    <body>
+        <ul id="produtos"> </ul>
+        <script>
+            function reqListener () {
+                //console.log(this.responseText);
+                
+                var produtos = JSON.parse(this.responseText);
+                var objProdutos = document.querySelector('ul#produtos');
+                debugger;
+                for (var i=0,total=produtos.length; i<total;i++){
+                    objProdutos.innerHTML += '<li> Elemento ' + produtos[i].nome + '</li>'+ '\
+                            <a href="#" onClick="comprar(\'' + produtos[i].id +'\')">Comprar</a></li>';
+                        }
+            };
+
+            var oReq = new XMLHttpRequest();
+            oReq.onload = reqListener;
+            oReq.open("get", "http://localhost:3000/produtos/", true);
+            oReq.send();
+
+
+        </script>
+    </body>
+</html>

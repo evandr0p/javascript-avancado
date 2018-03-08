@@ -1,0 +1,50 @@
+<html>
+        <head>
+            <title> Ajax Client </title>
+        </head>
+    
+        <body>
+            <div id="lista">
+                <ul id="usuarios"> </ul>
+            </div>
+
+            <div id="detail">
+
+            </div>
+            <script>
+                function reqListener () {
+                    //console.log(this.responseText);
+                    
+                    var usuarios = JSON.parse(this.responseText);
+                    var objUsuario = document.querySelector('ul#usuarios');
+                    //debugger;
+                    for (var i=0,total=usuarios.results.length; i<total;i++){
+                        objUsuario.innerHTML += '<li> ' + usuarios.results[i].name.first 
+                                                        + ' ' + usuarios.results[i].name.last 
+                                                        + ' <a href="#" onClick="getDetails(\''+ usuarios.results[i].id.value +'\')" >More Info</a> </li>';
+                            }
+                };
+    
+                var oReq = new XMLHttpRequest();
+                oReq.onload = reqListener;
+                oReq.open("get", "https://randomuser.me/api?results=10", true);
+                oReq.send();
+    
+
+                function getDetails(item){
+                    //debugger;
+                    var oReqDetail = new XMLHttpRequest();
+                    oReq.onload = function  () {
+                        var selDetail = document.querySelector('div#detail');
+                        var detail = this.responseText;//JSON.parse(this.responseText);
+                        selDetail.innerHTML+=detail;
+                    };
+                    oReq.open("get", "https://randomuser.me/api?id="+ item, true);
+                    oReq.send();
+
+
+                    }
+    
+            </script>
+        </body>
+    </html>
